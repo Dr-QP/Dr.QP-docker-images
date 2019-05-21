@@ -16,9 +16,12 @@ addons:
     update: true
     packages:
       - docker-ce
-      - cmake
       - ninja
       - clang
+
+before_install:
+  - curl -sSL https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4-Linux-x86_64.sh -o /tmp/cmake.sh
+  - bash /tmp/cmake.sh
 
 script:
   - mkdir build && cd build
