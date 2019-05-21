@@ -28,6 +28,7 @@ add_custom_target(
   Docker ALL 
   DEPENDS Dockerfile 
   COMMENT "Building Dockerfile"
+  COMMAND cat Dockerfile
   COMMAND docker build ${CMAKE_CURRENT_LIST_DIR}/context -f Dockerfile -t ${DOCKER_TAG}
   USES_TERMINAL
 )
