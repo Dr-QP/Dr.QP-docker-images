@@ -10,9 +10,14 @@ linux: &linux
 matrix:
   include:
     - <<: *linux
-
-install:
-  - apt-get update && apt-get -y install cmake ninja clang
+      addons:
+        apt:
+          update: true
+          packages:
+            - docker-ce
+            - cmake
+            - ninja
+            - clang
 
 script:
   - mkdir build && cd build
