@@ -10,14 +10,15 @@ linux: &linux
 matrix:
   include:
     - <<: *linux
-      addons:
-        apt:
-          update: true
-          packages:
-            - docker-ce
-            - cmake
-            - ninja
-            - clang
+
+addons:
+  apt:
+    update: true
+    packages:
+      - docker-ce
+      - cmake
+      - ninja
+      - clang
 
 script:
   - mkdir build && cd build
