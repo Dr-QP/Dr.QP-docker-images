@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
@@ -10,22 +5,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: CMake@1
+  inputs:
+    cmakeArgs: $(Build.SourcesDirectory) -G Ninja
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-  
-# - task: Docker@2
-# - task: DockerCompose@0
-#   inputs:
-#     containerregistrytype: 'Container Registry'
-#     dockerComposeFile: '**/docker-compose.yml'
-#     dockerComposeFileArgs: 'env=var'
-#     action: 'Build services'
-
-#   inputs:
-#     command: 'buildAndPush'
-#     Dockerfile: '**/Dockerfile'
+- task: CMake@1
+  inputs:
+    cmakeArgs: --build . 
