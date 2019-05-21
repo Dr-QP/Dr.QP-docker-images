@@ -11,8 +11,8 @@ matrix:
   include:
     - <<: *linux
 
-# install:
-#   - apt-get -y install cmake ninja clang
+install:
+  - apt-get update && apt-get -y install cmake ninja clang
 
 script:
   - mkdir build && cd build
