@@ -10,7 +10,7 @@ add_custom_command(
     partials/Dockerfile.cuda
     partials/Dockerfile.miniconda
     partials/Dockerfile.tensorflow-gpu
-
+    partials/Dockerfile.jupyterlab
   COMMENT "Preprocessing Dockerfile"
   COMMAND "${CMAKE_C_COMPILER}" 
     --language c
