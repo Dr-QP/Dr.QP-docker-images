@@ -22,13 +22,24 @@ add_custom_command(
   VERBATIM
 )
 
+set(DOCKER_TAG "drqp/dev-studio:latest")
+
 add_custom_target( 
   Docker ALL 
   DEPENDS Dockerfile 
   COMMENT "Building Dockerfile"
-  COMMAND docker build ${CMAKE_CURRENT_LIST_DIR}/context -f Dockerfile -t dr-qp/dev-studio:latest
+  COMMAND docker build ${CMAKE_CURRENT_LIST_DIR}/context -f Dockerfile -t ${DOCKER_TAG}
   USES_TERMINAL
-) 
+)
+
+add_custom_target( 
+  Upload
+  DEPENDS Docker 
+  COMMENT "Uploading docker images"
+  COMMAND docker push ${DOCKER_TAG}
+  USES_TERMINAL
+)
+
 
 add_custom_target(Purge
   COMMAND docker system prune --force
