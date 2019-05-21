@@ -29,3 +29,13 @@ add_custom_target(
   COMMAND docker build ${CMAKE_CURRENT_LIST_DIR}/context -f Dockerfile -t dr-qp/dev-studio:latest
   USES_TERMINAL
 ) 
+
+add_custom_target(Purge
+  COMMAND docker system prune --force
+  COMMENT "Purging unused Docker images"
+)
+
+add_custom_target(PurgeAll
+  COMMAND docker system prune --all --force
+  COMMENT "Purging ALL Docker images, even used"
+)
