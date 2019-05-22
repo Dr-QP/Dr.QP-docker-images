@@ -7,10 +7,13 @@ include(ExternalProject)
 add_custom_command( 
   OUTPUT Dockerfile
   DEPENDS 
+    Dockerfile.main
     partials/Dockerfile.cuda
     partials/Dockerfile.miniconda
     partials/Dockerfile.tensorflow-gpu
     partials/Dockerfile.jupyterlab
+    partials/Dockerfile.python
+    partials/Dockerfile.code-server
   COMMENT "Preprocessing Dockerfile"
   COMMAND "${CMAKE_C_COMPILER}" 
     --language c

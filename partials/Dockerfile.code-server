@@ -1,0 +1,18 @@
+
+RUN apt-get update && apt-get install -y \
+	dumb-init
+
+//# We create first instead of just using WORKDIR as when WORKDIR creates, the user is root.
+RUN mkdir -p /home/coder/project
+
+WORKDIR /home/coder/project
+
+//# This assures we have a volume mounted even if the user forgot to do bind mount.
+//# So that they do not lose their data if they delete the container.
+VOLUME [ "/home/coder/project" ]
+
+COPY --from=codercom/code-server:latest /usr/local/bin/code-server /usr/local/bin/code-server
+
+EXPOSE 8443
+
+ENTRYPOINT ["dumb-init", "code-server"]

@@ -1,0 +1,4 @@
+
+RUN conda install -y python=3.7 pylint \
+    && conda clean --all --yes
+    
