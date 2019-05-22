@@ -13,4 +13,3 @@ COPY --from=codercom/code-server:latest /usr/local/bin/code-server /usr/local/bi
 
 EXPOSE 8443
 
-ENTRYPOINT ["dumb-init", "code-server"]

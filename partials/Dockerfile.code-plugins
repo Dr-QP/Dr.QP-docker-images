@@ -1,0 +1,17 @@
+
+RUN  code-server --install-extension magicstack.magicpython \
+  && code-server --install-extension ms-python.python \
+  && code-server --install-extension ajshort.ros \
+  && code-server --install-extension VisualStudioExptTeam.vscodeintellicode \
+  && code-server --install-extension eamodio.gitlens \
+  && code-server --install-extension ms-vscode.cpptools \
+  && code-server --install-extension cheshirekow.cmake-format \
+  && code-server --install-extension vector-of-bool.cmake-tools \
+  && code-server --install-extension twxs.cmake \
+  && code-server --install-extension ms-python.anaconda-extension-pack \
+  && code-server --install-extension mitaki28.vscode-clang \
+  && code-server --install-extension xaver.clang-format \
+  && code-server --install-extension vadimcn.vscode-lldb \
+  && code-server --install-extension sleistner.vscode-fileutils \
+  && code-server --install-extension oderwat.indent-rainbow \
+  && code-server --install-extension mitchdenny.ecdc

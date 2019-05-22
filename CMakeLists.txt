@@ -20,8 +20,11 @@ docker_partials(MAIN_DOCKER PARTS
   miniconda
   python
   tensorflow-gpu
+  jupyterlab
   code-server
-  jupyterlab)
+  code-plugins
+  main
+)
 
 message(STATUS ${MAIN_DOCKER})
 
@@ -40,7 +43,7 @@ add_custom_target(
   Docker ALL 
   DEPENDS Dockerfile 
   COMMENT "Building Dockerfile"
-  COMMAND cat Dockerfile
+  # COMMAND cat Dockerfile
   COMMAND docker build ${CMAKE_CURRENT_LIST_DIR}/context -f Dockerfile -t ${DOCKER_TAG}
   USES_TERMINAL
 )
