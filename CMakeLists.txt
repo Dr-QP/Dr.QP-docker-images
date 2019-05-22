@@ -1,26 +1,37 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(Dr-QP-docker C)
-include(ExternalProject)
 
+macro(docker_partials RESULT_VAR)
+  cmake_parse_arguments(
+    PARSED_ARGS 1
+    ""
+    "PARTS"
+    ""
+    ${ARGN})
+  list(TRANSFORM PARSED_ARGS_PARTS
+    PREPEND ${CMAKE_CURRENT_LIST_DIR}/partials/Dockerfile.
+    OUTPUT_VARIABLE ${RESULT_VAR})
+  
+endmacro()
+
+docker_partials(MAIN_DOCKER PARTS
+  cuda
+  miniconda
+  python
+  tensorflow-gpu
+  code-server
+  jupyterlab)
+
+message(STATUS ${MAIN_DOCKER})
 
 add_custom_command( 
   OUTPUT Dockerfile
-  DEPENDS 
-    Dockerfile.main
-    partials/Dockerfile.cuda
-    partials/Dockerfile.miniconda
-    partials/Dockerfile.tensorflow-gpu
-    partials/Dockerfile.jupyterlab
-    partials/Dockerfile.python
-    partials/Dockerfile.code-server
-  COMMENT "Preprocessing Dockerfile"
-  COMMAND "${CMAKE_C_COMPILER}" 
-    --language c
-    --preprocess "${CMAKE_CURRENT_LIST_DIR}/Dockerfile.main"
-    --include-directory ${CMAKE_CURRENT_LIST_DIR}/partials
-    | grep -v "#" > Dockerfile
+  DEPENDS ${MAIN_DOCKER}
+  COMMENT "Merging main Dockerfile"
+  COMMAND cat "$<JOIN:${MAIN_DOCKER},;>" > Dockerfile
   VERBATIM
+  COMMAND_EXPAND_LISTS
 )
 
 set(DOCKER_TAG "drqp/dev-studio:latest")

@@ -1,7 +1,0 @@
-#include "Dockerfile.cuda"
-#include "Dockerfile.miniconda"
-#include "Dockerfile.python"
-#include "Dockerfile.tensorflow-gpu"
-
-#include "Dockerfile.code-server"
-#include "Dockerfile.jupyterlab"
