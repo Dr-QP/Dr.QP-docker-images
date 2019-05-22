@@ -2,6 +2,8 @@
 RUN  code-server --install-extension magicstack.magicpython \
   && code-server --install-extension ms-python.python \
   && code-server --install-extension ajshort.ros \
+  && code-server --install-extension ajshort.msg \
+  && code-server --install-extension ajshort.include-autocomplete \
   && code-server --install-extension VisualStudioExptTeam.vscodeintellicode \
   && code-server --install-extension eamodio.gitlens \
   && code-server --install-extension ms-vscode.cpptools \
