@@ -2,9 +2,7 @@
 RUN apt-get update && apt-get install -y \
 	dumb-init
 
-# We create first instead of just using WORKDIR as when WORKDIR creates, the user is root.
-RUN mkdir -p /home/coder/project
-
+ADD default_project /home/coder/project
 WORKDIR /home/coder/project
 
 # This assures we have a volume mounted even if the user forgot to do bind mount.
