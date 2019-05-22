@@ -2,9 +2,7 @@
 RUN  code-server --install-extension magicstack.magicpython \
   && code-server --install-extension ms-python.python \
   && code-server --install-extension ajshort.ros \
-  && code-server --install-extension ajshort.msg \
   && code-server --install-extension ajshort.include-autocomplete \
-  && code-server --install-extension VisualStudioExptTeam.vscodeintellicode \
   && code-server --install-extension eamodio.gitlens \
   && code-server --install-extension ms-vscode.cpptools \
   && code-server --install-extension cheshirekow.cmake-format \
@@ -17,3 +15,16 @@ RUN  code-server --install-extension magicstack.magicpython \
   && code-server --install-extension sleistner.vscode-fileutils \
   && code-server --install-extension oderwat.indent-rainbow \
   && code-server --install-extension mitchdenny.ecdc
+
+
+RUN apt-get -qq update && apt-get -qq -y install curl bsdtar \
+  && curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ajshort/vsextensions/msg/latest/vspackage | bsdtar -xvf - extension \
+  && mv extension ~/.local/share/code-server/extensions/ajshort.msg-latest \
+  && curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualStudioExptTeam/vsextensions/vscodeintellicode/latest/vspackage | bsdtar -xvf - extension \
+  && mv extension ~/.local/share/code-server/extensions/VisualStudioExptTeam.vscodeintellicode-latest \
+  && rm -rf "*.vsix" \
+  && apt-get -qq -y remove curl bsdtar \
+  && apt-get -qq -y autoremove \
+  && apt-get autoclean \
+  && rm -rf "/var/lib/apt/lists/*" /var/log/dpkg.log
+
