@@ -2,6 +2,8 @@
 RUN apt-get update && apt-get install -y \
 	dumb-init
 
+RUN conda install -y git
+
 ADD default_project /home/coder/project
 WORKDIR /home/coder/project
 
