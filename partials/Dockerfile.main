@@ -1,2 +1,4 @@
 
+USER ${CODE_SERVER_USER_NAME}
+
 ENTRYPOINT ["dumb-init", "code-server"]

@@ -1,11 +1,30 @@
+# This partial changes docker user to coder and he is sudoer
 
 RUN apt-get update && apt-get install -y \
+	locales \
+	sudo \
 	dumb-init
+
+RUN locale-gen en_US.UTF-8
+# We unfortunately cannot use update-locale because docker will not use the env variables
+# configured in /etc/default/locale so we need to set it manually.
+ENV LC_ALL=en_US.UTF-8
+
+ENV CODE_SERVER_USER_NAME = coder
+
+RUN adduser --gecos '' --disabled-password ${CODE_SERVER_USER_NAME} && \
+	echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd
+
+ENV CODE_SERVER_USER_HOME = /home/${CODE_SERVER_USER_NAME}
+
+RUN apt-get update && apt-get install -y 
 
 RUN conda install -y git
 
-ADD default_project /home/coder/project
-WORKDIR /home/coder/project
+
+ADD default_project ${CODE_SERVER_USER_HOME}/project
+
+WORKDIR ${CODE_SERVER_USER_HOME}/project
 
 # This assures we have a volume mounted even if the user forgot to do bind mount.
 # So that they do not lose their data if they delete the container.
