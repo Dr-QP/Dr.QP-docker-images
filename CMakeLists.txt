@@ -44,6 +44,7 @@ add_custom_target(
   DEPENDS Dockerfile 
   COMMENT "Building Dockerfile"
   # COMMAND cat Dockerfile
+  COMMAND env | sort
   COMMAND docker build ${CMAKE_CURRENT_LIST_DIR}/context -f Dockerfile -t ${DOCKER_TAG}
   USES_TERMINAL
 )
